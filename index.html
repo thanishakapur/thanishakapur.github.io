@@ -80,13 +80,13 @@
     font-family:"Bricolage Grotesque",sans-serif;
     font-variation-settings:"wdth" 78, "opsz" 96;
     font-weight:800;
-    font-size:clamp(3.4rem,15vw,11.5rem);
-    line-height:.86;
-    letter-spacing:-.035em;
+    font-size:clamp(2.4rem,9vw,7.5rem);
+    line-height:1.02;
+    letter-spacing:-.03em;
     margin:0;
     color:var(--bone);
   }
-  h1.name .b{ display:block; }
+  h1.name .b{ display:inline-block; }
   h1.name .b:last-child{ color:var(--amber); }
   .reveal{ animation:up .9s cubic-bezier(.16,.84,.28,1) both; }
   .reveal:nth-child(2){ animation-delay:.08s; }
@@ -99,14 +99,12 @@
       display:grid;
       grid-template-columns:1.15fr 1fr;
       gap:clamp(2rem,5vw,4.5rem);
-      align-items:baseline;
+      align-items:start;
     }
-    .hero-copy .thesis{ max-width:none; }
-    .hero-copy .subthesis{ margin:0; max-width:none; }
   }
+  .hero-text{ max-width:50ch; }
   .thesis{
     margin:0;
-    max-width:44ch;
     font-size:clamp(1.15rem,2.6vw,1.6rem);
     line-height:1.42;
     font-weight:400;
@@ -114,12 +112,9 @@
   }
   .thesis em{ font-style:normal; color:var(--amber); }
   .subthesis{
-    margin:1.1rem 0 0; max-width:50ch;
+    margin:1.1rem 0 0;
     font-size:1rem; color:var(--dim);
   }
-  @media (min-width:900px){ .subthesis{ margin-top:0; } }
-
-  .hero-side{ display:flex; flex-direction:column; gap:1.6rem; }
 
   .snapshot{
     background:var(--raised); border:1px solid var(--line); border-radius:3px;
@@ -372,17 +367,17 @@
       <span>Chicago</span>
       <span>Open to part-time roles, autumn 2026</span>
     </p>
-    <h1 class="name"><span class="b reveal">Thanisha</span><span class="b reveal">Kapur</span></h1>
+    <h1 class="name"><span class="b reveal">Thanisha</span> <span class="b reveal">Kapur</span></h1>
     <div class="hero-copy">
-      <p class="thesis">Before you can automate a decision, someone has to write down exactly what that decision is. That work is mostly interviews, edge cases, and long arguments about definitions, and it is where I spend most of my time.</p>
-      <div class="hero-side">
+      <div class="hero-text">
+        <p class="thesis">Before you can automate a decision, someone has to write down exactly what that decision is. That work is mostly interviews, edge cases, and long arguments about definitions, and it is where I spend most of my time.</p>
         <p class="subthesis">I study data science and business economics at the University of Chicago. I am currently a forward deployed operations intern at Fenwick &amp; West LLP, building AI and automation into how the firm runs. Long term, I am headed toward technology IP law.</p>
-        <div class="snapshot">
-          <div class="row"><span class="k">Now</span><span class="v">Forward deployed operations intern, Fenwick &amp; West LLP</span></div>
-          <div class="row"><span class="k">Studying</span><span class="v">B.S. Data Science, B.A. Business Economics, University of Chicago, expected 2029</span></div>
-          <div class="row"><span class="k">Core tools</span><span class="v">Python, SQL, Azure Databricks, Salesforce, Tableau</span></div>
-          <div class="row"><span class="k">Languages</span><span class="v">English and Hindi fluent, Spanish conversational</span></div>
-        </div>
+      </div>
+      <div class="snapshot">
+        <div class="row"><span class="k">Now</span><span class="v">Forward deployed operations intern, Fenwick &amp; West LLP</span></div>
+        <div class="row"><span class="k">Studying</span><span class="v">B.S. Data Science, B.A. Business Economics, University of Chicago, expected 2029</span></div>
+        <div class="row"><span class="k">Core tools</span><span class="v">Python, SQL, Azure Databricks, Salesforce, Tableau</span></div>
+        <div class="row"><span class="k">Languages</span><span class="v">English and Hindi fluent, Spanish conversational</span></div>
       </div>
     </div>
   </div>
