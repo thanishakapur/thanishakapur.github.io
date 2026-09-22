@@ -23,7 +23,7 @@
     --dimmer: #6F6380;
     --amber:  #F5B841;
     --line:   rgba(240,233,225,.13);
-    --measure: 62ch;
+    --measure: 68ch;
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
@@ -55,7 +55,7 @@
   .skip{ position:absolute; left:-9999px; }
   .skip:focus{ left:1rem; top:1rem; background:var(--amber); color:var(--void); padding:.6rem 1rem; z-index:99; border:0; }
 
-  .wrap{ max-width:1240px; margin:0 auto; padding:0 clamp(1.25rem,5vw,4rem); }
+  .wrap{ max-width:1320px; margin:0 auto; padding:0 clamp(1.25rem,5vw,4rem); }
 
   /* ================= HERO ================= */
 
@@ -93,8 +93,19 @@
   @keyframes up{ from{ opacity:0; transform:translateY(.3em); } to{ opacity:1; transform:none; } }
   @media (prefers-reduced-motion:reduce){ .reveal{ animation:none; } }
 
+  .hero-copy{ margin-top:clamp(2rem,5vw,3rem); }
+  @media (min-width:900px){
+    .hero-copy{
+      display:grid;
+      grid-template-columns:1.15fr 1fr;
+      gap:clamp(2rem,5vw,4.5rem);
+      align-items:baseline;
+    }
+    .hero-copy .thesis{ max-width:none; }
+    .hero-copy .subthesis{ margin:0; max-width:none; }
+  }
   .thesis{
-    margin:clamp(2rem,5vw,3rem) 0 0;
+    margin:0;
     max-width:44ch;
     font-size:clamp(1.15rem,2.6vw,1.6rem);
     line-height:1.42;
@@ -105,6 +116,25 @@
   .subthesis{
     margin:1.1rem 0 0; max-width:50ch;
     font-size:1rem; color:var(--dim);
+  }
+  @media (min-width:900px){ .subthesis{ margin-top:0; } }
+
+  .hero-side{ display:flex; flex-direction:column; gap:1.6rem; }
+
+  .snapshot{
+    background:var(--raised); border:1px solid var(--line); border-radius:3px;
+    padding:1.4rem 1.35rem; max-width:50ch;
+  }
+  .snapshot .row{ padding:.75rem 0; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:.3rem; }
+  .snapshot .row:first-child{ padding-top:0; }
+  .snapshot .row:last-child{ border-bottom:0; padding-bottom:0; }
+  .snapshot .k{
+    font-family:"Bricolage Grotesque",sans-serif; font-variation-settings:"wdth" 84;
+    font-size:.7rem; font-weight:600; color:var(--dimmer);
+  }
+  .snapshot .v{
+    font-family:"Bricolage Grotesque",sans-serif; font-variation-settings:"wdth" 92;
+    font-size:.88rem; color:var(--bone); line-height:1.48;
   }
 
   /* ================= INDEX ================= */
@@ -214,12 +244,27 @@
     font-family:"Bricolage Grotesque",sans-serif;
     font-variation-settings:"wdth" 82;
     font-weight:700;
-    font-size:clamp(1.6rem,4.6vw,2.55rem);
+    font-size:clamp(1.6rem,4.6vw,2.5rem);
     line-height:1.08;
     letter-spacing:-.025em;
     margin:0 0 1.3rem;
-    max-width:19ch;
+    max-width:22ch;
     color:var(--bone);
+  }
+
+  @media (min-width:900px){
+    .case-body{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 280px;
+      column-gap:clamp(2rem,4vw,3.5rem);
+      align-items:start;
+    }
+    .case-body .beat{ grid-column:1; }
+    .case-body .facts{
+      grid-column:2; grid-row:1/-1;
+      position:sticky; top:1.5rem; align-self:start;
+      margin-top:0; max-width:none;
+    }
   }
 
   .answer{
@@ -264,10 +309,10 @@
 
   /* ================= LISTS ================= */
 
-  ul.plain{ list-style:none; margin:0; padding:0; max-width:var(--measure); }
+  ul.plain{ list-style:none; margin:0; padding:0; max-width:none; }
   ul.plain li{ padding:.8rem 0; border-bottom:1px solid var(--line); display:grid; gap:.15rem .9rem; }
   @media (min-width:600px){
-    ul.plain li{ grid-template-columns:minmax(0,1fr) 9rem; align-items:baseline; }
+    ul.plain li{ grid-template-columns:minmax(0,1fr) 10rem; align-items:baseline; }
     ul.plain .yr{ text-align:right; }
   }
   ul.plain b{
@@ -282,9 +327,9 @@
     font-size:.76rem; color:var(--dimmer); white-space:nowrap;
   }
 
-  .stack{ display:grid; gap:0; max-width:var(--measure); border-top:1px solid var(--line); }
+  .stack{ display:grid; gap:0; max-width:none; border-top:1px solid var(--line); }
   .stack div{ padding:.75rem 0; border-bottom:1px solid var(--line); display:grid; gap:.15rem .9rem; }
-  @media (min-width:600px){ .stack div{ grid-template-columns:7.5rem minmax(0,1fr); } }
+  @media (min-width:600px){ .stack div{ grid-template-columns:9rem minmax(0,1fr); } }
   .stack .k{
     font-family:"Bricolage Grotesque",sans-serif; font-variation-settings:"wdth" 84;
     font-size:.72rem; font-weight:600; color:var(--dimmer);
@@ -328,8 +373,18 @@
       <span>Open to part-time roles, autumn 2026</span>
     </p>
     <h1 class="name"><span class="b reveal">Thanisha</span><span class="b reveal">Kapur</span></h1>
-    <p class="thesis">Before you can automate a decision, someone has to write down exactly what that decision is. That work is mostly interviews, edge cases, and long arguments about definitions, and it is where I spend most of my time.</p>
-    <p class="subthesis">I study data science and business economics at the University of Chicago. I am currently a forward deployed operations intern at Fenwick &amp; West LLP, building AI and automation into how the firm runs. Long term, I am headed toward technology IP law.</p>
+    <div class="hero-copy">
+      <p class="thesis">Before you can automate a decision, someone has to write down exactly what that decision is. That work is mostly interviews, edge cases, and long arguments about definitions, and it is where I spend most of my time.</p>
+      <div class="hero-side">
+        <p class="subthesis">I study data science and business economics at the University of Chicago. I am currently a forward deployed operations intern at Fenwick &amp; West LLP, building AI and automation into how the firm runs. Long term, I am headed toward technology IP law.</p>
+        <div class="snapshot">
+          <div class="row"><span class="k">Now</span><span class="v">Forward deployed operations intern, Fenwick &amp; West LLP</span></div>
+          <div class="row"><span class="k">Studying</span><span class="v">B.S. Data Science, B.A. Business Economics, University of Chicago, expected 2029</span></div>
+          <div class="row"><span class="k">Core tools</span><span class="v">Python, SQL, Azure Databricks, Salesforce, Tableau</span></div>
+          <div class="row"><span class="k">Languages</span><span class="v">English and Hindi fluent, Spanish conversational</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -373,11 +428,14 @@
 
       <!-- ===== 1. Fenwick. Expand this one once you send more detail. ===== -->
       <article class="case" id="filing">
+        <div class="case-head">
         <p class="meta">Fenwick &amp; West LLP<span class="sep">/</span><span class="yr">Jul 2026 - Present</span></p>
         <h3>Which newly filed complaints does an attorney actually need to see?</h3>
         <div class="answer">
           <p>Every attorney had a different answer, and not one of them was written down.</p>
         </div>
+        </div>
+        <div class="case-body">
         <div class="beat">
           <h4>The problem</h4>
           <p>Attorneys were tracking newly filed complaints by checking legal data sources by hand and forwarding anything that looked relevant. The process was slow, it varied from person to person, and none of it existed in a form a system could use.</p>
@@ -396,15 +454,19 @@
           <div><span class="k">Context</span><span class="v">A newer forward deployed effort embedding AI and automation into firm operations, alongside attorneys, finance, and business teams</span></div>
           <div><span class="k">Status</span><span class="v">Running on a schedule, with precision tuning ongoing</span></div>
         </div>
+        </div>
       </article>
 
       <!-- ===== 2. Teachers Supporting Teachers ===== -->
       <article class="case" id="retention">
+        <div class="case-head">
         <p class="meta">Teachers Supporting Teachers<span class="sep">/</span><span class="yr">Jun 2026 - Aug 2026</span></p>
         <h3>What does retention mean when four groups define it differently?</h3>
         <div class="answer">
           <p>Each group had built its own definition, so the same word meant something different in every report.</p>
         </div>
+        </div>
+        <div class="case-body">
         <div class="beat">
           <h4>The problem</h4>
           <p>Retention, leadership, and staff-capacity outcomes were tracked across four stakeholder groups, each with its own working definition. Those numbers were going into funder reporting, grant materials, and the SY25-26 annual report, so inconsistent definitions created a real credibility problem with funders.</p>
@@ -423,15 +485,19 @@
           <div><span class="k">My part</span><span class="v">Data audit, metric standardization, CRM build, annual report data, grant research</span></div>
           <div><span class="k">Used for</span><span class="v">Funder reporting, grant materials, SY25-26 annual report, partner recruitment beyond CPS</span></div>
         </div>
+        </div>
       </article>
 
       <!-- ===== 3. campusCATALYST ===== -->
       <article class="case" id="staffing">
+        <div class="case-head">
         <p class="meta">Chicago Park District, via campusCATALYST<span class="sep">/</span><span class="yr">Mar 2026 - Jun 2026</span></p>
         <h3>Which fieldhouses are understaffed relative to the rest of the system?</h3>
         <div class="answer">
           <p>Without a shared scale, no one could compare any one site against the other 231.</p>
         </div>
+        </div>
+        <div class="case-body">
         <div class="beat">
           <h4>The problem</h4>
           <p>Staffed-hour planning across 232 fieldhouses was being decided one site at a time. Without a common scale, there was no way to ask whether a given site was under-resourced compared to the rest of the system, and that comparison is exactly what resource allocation depends on.</p>
@@ -450,15 +516,19 @@
           <div><span class="k">My part</span><span class="v">Consultant on a student team, working on metric structure, the tool build, and client recommendations</span></div>
           <div><span class="k">Status</span><span class="v">Delivered, and rerunnable as the underlying data updates</span></div>
         </div>
+        </div>
       </article>
 
       <!-- ===== 4. Memory Lab ===== -->
       <article class="case" id="clean">
+        <div class="case-head">
         <p class="meta">UChicago Memory Research Lab<span class="sep">/</span><span class="yr">Nov 2025 - Present</span></p>
         <h3>Which survey responses are clean enough to analyze?</h3>
         <div class="answer">
           <p>That depends entirely on the validation rules, which is why the rules themselves have to be written down and applied identically every time.</p>
         </div>
+        </div>
+        <div class="case-body">
         <div class="beat">
           <h4>The problem</h4>
           <p>Raw Prolific and JATOS exports are not analysis-ready. Before anyone can make a statistical claim, someone has to decide which responses count, flag the ones that do not, and reshape the exports into participant-level and item-level datasets. That has to happen every time new data comes in.</p>
@@ -476,6 +546,7 @@
           <div><span class="k">Scale</span><span class="v">650-item cognitive assessment, participant-level and item-level outputs</span></div>
           <div><span class="k">My part</span><span class="v">ETL and validation pipelines, automated QC, figure generation</span></div>
           <div><span class="k">Status</span><span class="v">Ongoing, feeding a coauthored manuscript</span></div>
+        </div>
         </div>
       </article>
     </section>
