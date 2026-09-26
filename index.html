@@ -226,6 +226,18 @@
   .case{ padding:0 0 clamp(2.5rem,6vw,3.6rem); scroll-margin-top:1rem; }
   .case + .case{ padding-top:clamp(2.5rem,6vw,3.6rem); border-top:1px solid var(--line); }
 
+  .also{
+    padding-top:clamp(2.5rem,6vw,3.6rem);
+    margin-bottom:clamp(2.5rem,6vw,3.6rem);
+    border-top:1px solid var(--line);
+  }
+  .also h4{
+    font-family:"Bricolage Grotesque",sans-serif;
+    font-variation-settings:"wdth" 88;
+    font-size:.76rem; font-weight:600; color:var(--dimmer);
+    margin:0 0 1.2rem;
+  }
+
   .case .meta{
     font-family:"Bricolage Grotesque",sans-serif;
     font-variation-settings:"wdth" 88;
@@ -385,9 +397,10 @@
 
 <section class="index" id="work">
   <div class="wrap">
-    <h2>Four questions I had to answer before I could build anything</h2>
+    <h2>Five questions I had to answer before I could build anything</h2>
     <ol class="qlist">
-      <li><a href="#filing"><span class="q">Which newly filed complaints does an attorney actually need to see?</span><span class="tag">Fenwick &amp; West LLP, automated complaint monitoring</span></a></li>
+      <li><a href="#filing"><span class="q">How does a newly filed complaint actually reach the attorney who needs it?</span><span class="tag">Fenwick &amp; West LLP, litigation complaint intake automation</span></a></li>
+      <li><a href="#savings"><span class="q">How much time did the firm's AI tools actually save, and how do you know?</span><span class="tag">Fenwick &amp; West LLP, AI efficiency analysis for patent litigation</span></a></li>
       <li><a href="#retention"><span class="q">What does retention mean when four groups define it differently?</span><span class="tag">Teachers Supporting Teachers, metric standardization and CRM rebuild</span></a></li>
       <li><a href="#staffing"><span class="q">Which fieldhouses are understaffed relative to the rest of the system?</span><span class="tag">Chicago Park District via campusCATALYST, 232-site scoring tool</span></a></li>
       <li><a href="#clean"><span class="q">Which survey responses are clean enough to analyze?</span><span class="tag">UChicago Memory Research Lab, ETL and validation pipeline</span></a></li>
@@ -421,38 +434,79 @@
     <section id="cases">
       <h2 class="sec">Case studies (all client or employer work, so the artifacts stay internal)</h2>
 
-      <!-- ===== 1. Fenwick. Expand this one once you send more detail. ===== -->
+      <!-- ===== 1. Fenwick, complaint intake automation ===== -->
       <article class="case" id="filing">
         <div class="case-head">
         <p class="meta">Fenwick &amp; West LLP<span class="sep">/</span><span class="yr">Jul 2026 - Present</span></p>
-        <h3>Which newly filed complaints does an attorney actually need to see?</h3>
+        <h3>How does a newly filed complaint actually reach the attorney who needs it?</h3>
         <div class="answer">
-          <p>Every attorney had a different answer, and not one of them was written down.</p>
+          <p>The alert was never the hard part. Getting the actual document into someone's hands was.</p>
         </div>
         </div>
         <div class="case-body">
         <div class="beat">
           <h4>The problem</h4>
-          <p>Attorneys were tracking newly filed complaints by checking legal data sources by hand and forwarding anything that looked relevant. The process was slow, it varied from person to person, and none of it existed in a form a system could use.</p>
+          <p>When a new case alert landed through the firm's docketing platform, getting the actual complaint document to the right attorney meant manually cross-referencing two separate systems every time. It pulled the litigation support and library team away from higher-value work, one lookup at a time.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I interviewed attorneys and operations staff to get their unwritten criteria stated explicitly, then turned those criteria into filter logic and a scheduled pipeline. It pulls from legal data sources, matches new filings against the criteria, and sends every match to the relevant attorney as an Outlook alert.</p>
+          <p>I built an automation that triggers the moment a docket alert email arrives in a shared inbox. It extracts the case identifiers, queries the firm's case-document repository, cross-references the result against a separate legal analytics platform to fill in case context, and returns the complaint file straight to the requesting attorney, with safeguards against duplicate processing.</p>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>The criteria people describe in a meeting are not the same criteria that hold up against real filings. Most of the iteration went into cutting false positives without dropping the filings that actually mattered. If attorneys stop trusting the alerts, they start ignoring them, and then the workflow is worse than the manual routine it replaced.</p>
+          <p>The two systems used incompatible case-number formats and undocumented API behavior that did not match its own documentation. I also had to build a classifier to flag edge cases, like patent filings needing special handling, and work with IT around an authentication limitation before the workflow could run unattended.</p>
         </div>
         <div class="facts">
-          <div><span class="k">Stack</span><span class="v">Python, SQL, Azure Databricks, Delta Lake, Unity Catalog, Databricks Workflows, Azure DevOps, Outlook</span></div>
-          <div><span class="k">My part</span><span class="v">Stakeholder interviews, filter logic, pipeline, alerting</span></div>
-          <div><span class="k">Context</span><span class="v">A newer forward deployed effort embedding AI and automation into firm operations, alongside attorneys, finance, and business teams</span></div>
-          <div><span class="k">Status</span><span class="v">Running on a schedule, with precision tuning ongoing</span></div>
+          <div><span class="k">Stack</span><span class="v">Writer Playbooks, REST APIs, Lucene query syntax, Microsoft Outlook and 365, Azure and Graph API</span></div>
+          <div><span class="k">My part</span><span class="v">Architected the workflow end to end, reverse engineered two undocumented APIs, built the edge-case classifier, led the handoff</span></div>
+          <div><span class="k">Status</span><span class="v">Live, handed off, and now maintained by the litigation support team</span></div>
         </div>
         </div>
       </article>
 
-      <!-- ===== 2. Teachers Supporting Teachers ===== -->
+      <!-- ===== 2. Fenwick, AI efficiency analysis ===== -->
+      <article class="case" id="savings">
+        <div class="case-head">
+        <p class="meta">Fenwick &amp; West LLP<span class="sep">/</span><span class="yr">Jul 2026 - Present</span></p>
+        <h3>How much time did the firm's AI tools actually save, and how do you know?</h3>
+        <div class="answer">
+          <p>A number everyone likes is not the same as a number that holds up.</p>
+        </div>
+        </div>
+        <div class="case-body">
+        <div class="beat">
+          <h4>The problem</h4>
+          <p>The firm wanted to show Amazon how much time AI tools including Harvey, Claude, Crane, Legora, and Westlaw AI had actually saved across a portfolio of patent litigation matters. A simple before-and-after average would have overstated the case, since AI adoption is easy to claim and hard to prove.</p>
+        </div>
+        <div class="beat">
+          <h4>What I did</h4>
+          <p>I designed a measurement methodology that compared AI-assisted work against historical, complexity-matched matters instead of a flat average, then parsed and classified thousands of raw time-entry records to determine which entries actually involved AI work. I built the Excel workbook and audit trail behind every number, with a confidence rating on each calculation.</p>
+        </div>
+        <div class="beat">
+          <h4>What made it hard</h4>
+          <p>Twice the analysis was quietly agreeing with itself. One version of a savings figure used a different baseline than another version of the same number, and a separate baseline had been chosen in a way that circularly matched the result it was meant to test. Catching both before Amazon saw them mattered more than the headline number itself.</p>
+        </div>
+        <div class="facts">
+          <div><span class="k">Stack</span><span class="v">Python, pandas, openpyxl, Excel with SUMIFS</span></div>
+          <div><span class="k">Scope</span><span class="v">60-day review, four litigation workflows, thousands of billing records</span></div>
+          <div><span class="k">My part</span><span class="v">Designed the methodology, built the analysis infrastructure, caught the errors, briefed senior stakeholders</span></div>
+          <div><span class="k">Status</span><span class="v">Delivered as the basis for a deliverable presented to Amazon</span></div>
+        </div>
+        </div>
+      </article>
+
+      <div class="also">
+        <h4>Also at Fenwick</h4>
+        <div class="stack">
+          <div><span class="k">FLEX Bullhorn matching tool</span><span class="v">Built a Claude Skill paired with a custom Bullhorn integration that turns plain English staffing questions into ranked attorney shortlists, replacing a search system that was failing silently on its own data gaps</span></div>
+          <div><span class="k">Litigation data reconciliation pipeline</span><span class="v">Built a Databricks pipeline reconciling two disconnected litigation systems, recovering confidence in hundreds of previously unmatched cases and catching a circular validation flaw before it shipped</span></div>
+          <div><span class="k">WIP billing analytics platform</span><span class="v">Sole developer of a drill-down tool showing partners which client matters have gone unbilled the longest, taken through the firm's governance process to become a supported production tool</span></div>
+          <div><span class="k">Amazon patent litigation efficiency tracker</span><span class="v">Ran discovery and wrote the full requirements and data model for a real-time budget and staffing dashboard across the firm's largest Amazon patent litigation matters</span></div>
+          <div><span class="k">Unified workplace platform</span><span class="v">Evaluated workplace booking vendors against the firm's requirements and helped prototype the unified room and desk booking platform that followed</span></div>
+        </div>
+      </div>
+
+      <!-- ===== 3. Teachers Supporting Teachers ===== -->
       <article class="case" id="retention">
         <div class="case-head">
         <p class="meta">Teachers Supporting Teachers<span class="sep">/</span><span class="yr">Jun 2026 - Aug 2026</span></p>
