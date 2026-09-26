@@ -266,9 +266,7 @@
       column-gap:clamp(2rem,4vw,3.5rem);
       align-items:start;
     }
-    .case-body .beat{ grid-column:1; }
     .case-body .facts{
-      grid-column:2; grid-row:1/-1;
       position:sticky; top:1.5rem; align-self:start;
       margin-top:0; max-width:none;
     }
@@ -282,12 +280,25 @@
   }
   .answer p{ margin:0; font-size:1.06rem; }
 
+  .beats{ min-width:0; }
   .beat{ margin:0 0 1.4rem; max-width:var(--measure); }
+  .beat:last-child{ margin-bottom:0; }
   .beat h4{
     font-family:"Bricolage Grotesque",sans-serif;
     font-variation-settings:"wdth" 88;
     font-size:.74rem; font-weight:600; color:var(--dimmer);
     margin:0 0 .35rem;
+  }
+
+  .blist{ list-style:none; margin:0; padding:0; max-width:var(--measure); }
+  .blist li{
+    position:relative; padding-left:1.1rem;
+    margin:0 0 .5rem; line-height:1.55;
+  }
+  .blist li:last-child{ margin-bottom:0; }
+  .blist li::before{
+    content:""; position:absolute; left:0; top:.62em;
+    width:.38em; height:.38em; background:var(--amber);
   }
 
   .facts{
@@ -397,13 +408,13 @@
 
 <section class="index" id="work">
   <div class="wrap">
-    <h2>Five questions I had to answer before I could build anything</h2>
+    <h2>Five projects I have worked on</h2>
     <ol class="qlist">
-      <li><a href="#filing"><span class="q">How does a newly filed complaint actually reach the attorney who needs it?</span><span class="tag">Fenwick &amp; West LLP, litigation complaint intake automation</span></a></li>
-      <li><a href="#savings"><span class="q">How much time did the firm's AI tools actually save, and how do you know?</span><span class="tag">Fenwick &amp; West LLP, AI efficiency analysis for patent litigation</span></a></li>
-      <li><a href="#retention"><span class="q">What does retention mean when four groups define it differently?</span><span class="tag">Teachers Supporting Teachers, metric standardization and CRM rebuild</span></a></li>
-      <li><a href="#staffing"><span class="q">Which fieldhouses are understaffed relative to the rest of the system?</span><span class="tag">Chicago Park District via campusCATALYST, 232-site scoring tool</span></a></li>
-      <li><a href="#clean"><span class="q">Which survey responses are clean enough to analyze?</span><span class="tag">UChicago Memory Research Lab, ETL and validation pipeline</span></a></li>
+      <li><a href="#filing"><span class="q">Complaint Intake Automation, Fenwick &amp; West LLP</span><span class="tag">Writer Playbooks, REST APIs, Azure and Graph API</span></a></li>
+      <li><a href="#savings"><span class="q">AI Efficiency Analysis, Fenwick &amp; West LLP</span><span class="tag">Python, pandas, Excel with SUMIFS</span></a></li>
+      <li><a href="#retention"><span class="q">Metric Standardization and CRM Rebuild, Teachers Supporting Teachers</span><span class="tag">Salesforce, Tableau, Excel</span></a></li>
+      <li><a href="#staffing"><span class="q">Fieldhouse Staffing Prioritization Tool, campusCATALYST</span><span class="tag">Excel scoring model</span></a></li>
+      <li><a href="#clean"><span class="q">Research Data Pipeline, UChicago Memory Research Lab</span><span class="tag">Python, pandas, JATOS</span></a></li>
     </ol>
   </div>
 </section>
@@ -414,9 +425,8 @@
   <aside class="rail">
     <nav aria-label="Sections">
       <ul>
-        <li><a href="#cases">Case studies</a></li>
+        <li><a href="#cases">Projects</a></li>
         <li><a href="#how">How I work</a></li>
-        <li><a href="#where">Where</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -432,29 +442,39 @@
   <main class="body">
 
     <section id="cases">
-      <h2 class="sec">Case studies (all client or employer work, so the artifacts stay internal)</h2>
-
       <!-- ===== 1. Fenwick, complaint intake automation ===== -->
       <article class="case" id="filing">
         <div class="case-head">
         <p class="meta">Fenwick &amp; West LLP<span class="sep">/</span><span class="yr">Jul 2026 - Present</span></p>
-        <h3>How does a newly filed complaint actually reach the attorney who needs it?</h3>
+        <h3>Complaint Intake Automation</h3>
         <div class="answer">
-          <p>The alert was never the hard part. Getting the actual document into someone's hands was.</p>
+          <p>The question I was forced to answer: how does a newly filed complaint actually reach the attorney who needs it</p>
         </div>
         </div>
         <div class="case-body">
+        <div class="beats">
         <div class="beat">
           <h4>The problem</h4>
-          <p>When a new case alert landed through the firm's docketing platform, getting the actual complaint document to the right attorney meant manually cross-referencing two separate systems every time. It pulled the litigation support and library team away from higher-value work, one lookup at a time.</p>
+          <p>Getting a new complaint to the right attorney meant manually cross-referencing two separate systems every time, pulling the litigation support team away from higher-value work.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I built an automation that triggers the moment a docket alert email arrives in a shared inbox. It extracts the case identifiers, queries the firm's case-document repository, cross-references the result against a separate legal analytics platform to fill in case context, and returns the complaint file straight to the requesting attorney, with safeguards against duplicate processing.</p>
+          <ul class="blist">
+            <li>Built an automation that triggers the moment a docket alert email arrives in a shared inbox</li>
+            <li>Extracts the case identifiers and queries the firm's case-document repository</li>
+            <li>Cross-references the result against a separate legal analytics platform to fill in case context</li>
+            <li>Returns the complaint file straight to the requesting attorney, with safeguards against duplicate processing</li>
+          </ul>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>The two systems used incompatible case-number formats and undocumented API behavior that did not match its own documentation. I also had to build a classifier to flag edge cases, like patent filings needing special handling, and work with IT around an authentication limitation before the workflow could run unattended.</p>
+          <ul class="blist">
+            <li>The two systems used incompatible case-number formats</li>
+            <li>API behavior did not match its own documentation</li>
+            <li>Built a classifier to flag edge cases, like patent filings needing special handling</li>
+            <li>Worked with IT around an authentication limitation before the workflow could run unattended</li>
+          </ul>
+        </div>
         </div>
         <div class="facts">
           <div><span class="k">Stack</span><span class="v">Writer Playbooks, REST APIs, Lucene query syntax, Microsoft Outlook and 365, Azure and Graph API</span></div>
@@ -468,23 +488,33 @@
       <article class="case" id="savings">
         <div class="case-head">
         <p class="meta">Fenwick &amp; West LLP<span class="sep">/</span><span class="yr">Jul 2026 - Present</span></p>
-        <h3>How much time did the firm's AI tools actually save, and how do you know?</h3>
+        <h3>AI Efficiency Analysis</h3>
         <div class="answer">
-          <p>A number everyone likes is not the same as a number that holds up.</p>
+          <p>The question I was forced to answer: how much time did the firm's AI tools actually save, and how do you know</p>
         </div>
         </div>
         <div class="case-body">
+        <div class="beats">
         <div class="beat">
           <h4>The problem</h4>
-          <p>The firm wanted to show Amazon how much time AI tools including Harvey, Claude, Crane, Legora, and Westlaw AI had actually saved across a portfolio of patent litigation matters. A simple before-and-after average would have overstated the case, since AI adoption is easy to claim and hard to prove.</p>
+          <p>The firm wanted to show Amazon how much time AI tools had actually saved across its patent litigation matters, but a simple before-and-after average would have overstated the case.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I designed a measurement methodology that compared AI-assisted work against historical, complexity-matched matters instead of a flat average, then parsed and classified thousands of raw time-entry records to determine which entries actually involved AI work. I built the Excel workbook and audit trail behind every number, with a confidence rating on each calculation.</p>
+          <ul class="blist">
+            <li>Designed a measurement methodology comparing AI-assisted work against historical, complexity-matched matters instead of a flat average</li>
+            <li>Parsed and classified thousands of raw time-entry records to determine which entries actually involved AI work</li>
+            <li>Built the Excel workbook and audit trail behind every number, with a confidence rating on each calculation</li>
+          </ul>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>Twice the analysis was quietly agreeing with itself. One version of a savings figure used a different baseline than another version of the same number, and a separate baseline had been chosen in a way that circularly matched the result it was meant to test. Catching both before Amazon saw them mattered more than the headline number itself.</p>
+          <ul class="blist">
+            <li>Found two versions of a savings figure using different baselines</li>
+            <li>Found a baseline that had been chosen in a way that circularly matched the result it was meant to test</li>
+            <li>Caught both before Amazon saw them</li>
+          </ul>
+        </div>
         </div>
         <div class="facts">
           <div><span class="k">Stack</span><span class="v">Python, pandas, openpyxl, Excel with SUMIFS</span></div>
@@ -510,23 +540,33 @@
       <article class="case" id="retention">
         <div class="case-head">
         <p class="meta">Teachers Supporting Teachers<span class="sep">/</span><span class="yr">Jun 2026 - Aug 2026</span></p>
-        <h3>What does retention mean when four groups define it differently?</h3>
+        <h3>Metric Standardization and CRM Rebuild</h3>
         <div class="answer">
-          <p>Each group had built its own definition, so the same word meant something different in every report.</p>
+          <p>The question I was forced to answer: what does retention mean when four groups define it differently</p>
         </div>
         </div>
         <div class="case-body">
+        <div class="beats">
         <div class="beat">
           <h4>The problem</h4>
-          <p>Retention, leadership, and staff-capacity outcomes were tracked across four stakeholder groups, each with its own working definition. Those numbers were going into funder reporting, grant materials, and the SY25-26 annual report, so inconsistent definitions created a real credibility problem with funders.</p>
+          <p>Retention, leadership, and staff-capacity outcomes were tracked across four stakeholder groups, each with its own definition, creating a real credibility problem with funders.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I audited program data across all four groups, reconciled the competing definitions into one set everyone could report against, and built the standardized measures into Tableau dashboards and the annual report. Separately, I rebuilt the Salesforce CRM around the school recruitment pipeline, so prospective school partners, key decision-makers, and outreach history all lived in one place.</p>
+          <ul class="blist">
+            <li>Audited program data across all four stakeholder groups</li>
+            <li>Reconciled competing definitions into one set everyone could report against</li>
+            <li>Built the standardized measures into Tableau dashboards and the annual report</li>
+            <li>Rebuilt the Salesforce CRM around the school recruitment pipeline</li>
+          </ul>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>Standardizing a metric means somebody's existing number has to change. Getting agreement on which definition to adopt took as much work as implementing it did.</p>
+          <ul class="blist">
+            <li>Standardizing a metric meant somebody's existing number had to change</li>
+            <li>Getting agreement on which definition to adopt took as much work as implementing it</li>
+          </ul>
+        </div>
         </div>
         <div class="facts">
           <div><span class="k">Stack</span><span class="v">Salesforce, Tableau, Excel</span></div>
@@ -541,23 +581,32 @@
       <article class="case" id="staffing">
         <div class="case-head">
         <p class="meta">Chicago Park District, via campusCATALYST<span class="sep">/</span><span class="yr">Mar 2026 - Jun 2026</span></p>
-        <h3>Which fieldhouses are understaffed relative to the rest of the system?</h3>
+        <h3>Fieldhouse Staffing Prioritization Tool</h3>
         <div class="answer">
-          <p>Without a shared scale, no one could compare any one site against the other 231.</p>
+          <p>The question I was forced to answer: which fieldhouses are understaffed relative to the rest of the system</p>
         </div>
         </div>
         <div class="case-body">
+        <div class="beats">
         <div class="beat">
           <h4>The problem</h4>
-          <p>Staffed-hour planning across 232 fieldhouses was being decided one site at a time. Without a common scale, there was no way to ask whether a given site was under-resourced compared to the rest of the system, and that comparison is exactly what resource allocation depends on.</p>
+          <p>Staffed-hour planning across 232 fieldhouses was decided one site at a time, with no common scale to compare a site against the rest of the system.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I built an Excel decision-support tool that consolidates and scores seven operational metrics into a single comparable measure per site, and ran stakeholder interviews to surface the implementation constraints a purely quantitative model would have missed. The deliverable was the scoring tool plus recommendations the district could act on.</p>
+          <ul class="blist">
+            <li>Built an Excel decision-support tool consolidating seven operational metrics into one comparable score per site</li>
+            <li>Ran stakeholder interviews to surface implementation constraints a purely quantitative model would have missed</li>
+            <li>Delivered the scoring tool plus recommendations the district could act on</li>
+          </ul>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>A composite score is only useful if it does not hide the tradeoff underneath it. The tool keeps every component metric visible next to the total, so a planner can see whether a site scores low on one dimension or on all seven. Those two situations call for completely different responses.</p>
+          <ul class="blist">
+            <li>A composite score only works if it does not hide the tradeoff underneath it</li>
+            <li>Kept every component metric visible next to the total, since a low score on one dimension and a low score across all seven call for different responses</li>
+          </ul>
+        </div>
         </div>
         <div class="facts">
           <div><span class="k">Stack</span><span class="v">Excel scoring model, qualitative synthesis from stakeholder interviews</span></div>
@@ -572,23 +621,32 @@
       <article class="case" id="clean">
         <div class="case-head">
         <p class="meta">UChicago Memory Research Lab<span class="sep">/</span><span class="yr">Nov 2025 - Present</span></p>
-        <h3>Which survey responses are clean enough to analyze?</h3>
+        <h3>Research Data Pipeline</h3>
         <div class="answer">
-          <p>That depends entirely on the validation rules, which is why the rules themselves have to be written down and applied identically every time.</p>
+          <p>The question I was forced to answer: which survey responses are clean enough to analyze</p>
         </div>
         </div>
         <div class="case-body">
+        <div class="beats">
         <div class="beat">
           <h4>The problem</h4>
-          <p>Raw Prolific and JATOS exports are not analysis-ready. Before anyone can make a statistical claim, someone has to decide which responses count, flag the ones that do not, and reshape the exports into participant-level and item-level datasets. That has to happen every time new data comes in.</p>
+          <p>Raw Prolific and JATOS exports are not analysis-ready, and someone has to decide which responses count every time new data comes in.</p>
         </div>
         <div class="beat">
           <h4>What I did</h4>
-          <p>I built Python ETL and validation pipelines that turn raw exports into analysis-ready datasets, automated the quality checks across a 650-item cognitive assessment, and generated the figures showing performance patterns and experimental effects for a coauthored paper in development.</p>
+          <ul class="blist">
+            <li>Built Python ETL and validation pipelines turning raw exports into analysis-ready datasets</li>
+            <li>Automated quality checks across a 650-item cognitive assessment</li>
+            <li>Generated the figures showing performance patterns and experimental effects for a coauthored paper</li>
+          </ul>
         </div>
         <div class="beat">
           <h4>What made it hard</h4>
-          <p>Validation rules encode judgment calls about what counts as a real response. Writing those rules down and applying them consistently is what makes a finding reproducible, rather than dependent on whoever happened to clean the data that week.</p>
+          <ul class="blist">
+            <li>Validation rules encode judgment calls about what counts as a real response</li>
+            <li>Writing those rules down and applying them consistently is what makes a finding reproducible</li>
+          </ul>
+        </div>
         </div>
         <div class="facts">
           <div><span class="k">Stack</span><span class="v">Python, pandas, NumPy, Jupyter, JATOS, Prolific</span></div>
@@ -602,21 +660,13 @@
 
     <section id="how">
       <h2 class="sec">How I work</h2>
-      <p>All four projects follow the same pattern. An organization makes the same decision over and over, informally. It is expensive because it is manual, and inconsistent because everyone does it slightly differently. My job is to sit with the people making that decision, get the rule written down in a form that holds up against real data, build the thing that runs it, and then stick around long enough to find out whether anyone uses it.</p>
-      <p>That last part matters more than it sounds. Getting a pipeline to run is easier than getting people to use it, and only the second one changes how an organization works.</p>
-      <p>Long term I want to work in technology IP and patent law. Right now I am building the part of that work most lawyers never get, which is a working understanding of how these systems are actually put together.</p>
-    </section>
-
-    <section id="where">
-      <h2 class="sec">Where</h2>
-      <ul class="plain">
-        <li><span><b>Forward Deployed Operations Intern</b><span class="org">Fenwick &amp; West LLP, Mountain View</span></span><span class="yr">Jul 2026 - Present</span></li>
-        <li><span><b>Data &amp; Operations Intern</b><span class="org">Teachers Supporting Teachers, remote</span></span><span class="yr">Jun 2026 - Aug 2026</span></li>
-        <li><span><b>Undergraduate Research Assistant</b><span class="org">UChicago Memory Research Lab</span></span><span class="yr">Nov 2025 - Present</span></li>
-        <li><span><b>Consultant</b><span class="org">campusCATALYST, Chicago Park District engagement</span></span><span class="yr">Mar 2026 - Jun 2026</span></li>
-        <li><span><b>Research &amp; Development Intern</b><span class="org">Zoetic Motion, where I turned clinical requirements into AI product features for remote physical therapy and built Figma dashboards that made TensorFlow outputs readable to clinicians and El Camino Hospital advisors</span></span><span class="yr">Jan 2025 - Aug 2025</span></li>
-        <li><span><b>IDC and Health Subcommittee Chair</b><span class="org">Rep. Anna Eshoo's Student Advisory Board, where I ran legislative research on intellectual property and health policy gaps and drafted proposed legislation presented to the Congresswoman and her staff</span></span><span class="yr">Jan 2023 - Jun 2024</span></li>
-        <li><span><b>B.S. Data Science, B.A. Business Economics</b><span class="org">University of Chicago, minor in computational neuroscience</span></span><span class="yr">Expected Jun 2029</span></li>
+      <p>The pattern repeats across these projects.</p>
+      <ul class="blist">
+        <li>An organization makes the same decision over and over, informally</li>
+        <li>It is expensive because it is manual, and inconsistent because everyone does it slightly differently</li>
+        <li>My job is to get the rule written down in a form that holds up against real data, then build the thing that runs it</li>
+        <li>Getting a pipeline to run is easier than getting people to use it, and only the second one changes how an organization works</li>
+        <li>Long term I want to work in technology IP and patent law, and right now I am building a working understanding of how these systems actually get put together</li>
       </ul>
     </section>
 
@@ -629,8 +679,6 @@
         <div><span class="k">Libraries</span><span class="v">pandas, NumPy, Jupyter, Git, REST APIs, NLP</span></div>
         <div><span class="k">Research</span><span class="v">Qualtrics, JATOS, Prolific</span></div>
         <div><span class="k">Design</span><span class="v">Figma</span></div>
-        <div><span class="k">Spoken</span><span class="v">English and Hindi fluent, Spanish conversational</span></div>
-        <div><span class="k">Around campus</span><span class="v">Data Science Society, Neurotech Club, Undergraduate Law Magazine, South Asian Student Association</span></div>
       </div>
     </section>
 
@@ -640,8 +688,6 @@
 
 <footer class="foot" id="contact">
   <div class="wrap">
-    <h2>Looking for a part-time role this autumn</h2>
-    <p>Around 10 to 15 hours a week, Chicago remote or hybrid, in data, operations, consulting, or legal technology. Geographically flexible for summer 2027. If you want the longer version of any case study above, email me.</p>
     <div class="footlinks">
       <a href="mailto:thanisha@uchicago.edu">thanisha@uchicago.edu</a>
       <a href="https://linkedin.com/in/thanishakapur" target="_blank" rel="noopener">LinkedIn</a>
